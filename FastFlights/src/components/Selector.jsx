@@ -1,39 +1,60 @@
-import React from 'react';
-import { TicketBox } from './ticket';
-import Dropdown from './dropdown';
+import { TicketBox } from "./ticket";
+import Dropdown from "./dropdown";
+import React, { useState } from "react";
+import Papa from "papaparse";
+import "../data/airports.csv";
+import "../data/countries.csv";
 const tickets = [
   {
-    TimeRanges: { start: '08:00 AM', end: '10:00 AM' },
-    tripType: 'round trip',
-    from: 'Tampa',
-    to: 'Turkey',
-    price: '$100 USD',
-    class: 'economy',
+    TimeRanges: { start: "08:00 AM", end: "10:00 AM" },
+    tripType: "round trip",
+    from: "Tampa",
+    to: "Turkey",
+    price: "$100 USD",
+    class: "economy",
     stopAmount: 0,
   },
   {
-    TimeRanges: { start: '12:00 PM', end: '02:00 PM' },
-    tripType: 'one-way',
-    from: 'Atlanta',
-    to: 'Paris',
-    price: '$200 USD',
-    class: 'business',
+    TimeRanges: { start: "12:00 PM", end: "02:00 PM" },
+    tripType: "one-way",
+    from: "Atlanta",
+    to: "Paris",
+    price: "$200 USD",
+    class: "business",
     stopAmount: 1,
   },
   // Add more tickets as needed
 ];
 
-function Selector() {
-  let class_list = [
-    'Class',
-    'Economy',
-    'Premium Economy',
-    'Business',
-    'First Class',
-  ];
-  let IATACode = ['TPA', 'ORL'];
+const allowedExtensions = ["csv"];
 
-  let trip_type = ['One-Way', 'Round-Trip'];
+function Selector() {
+  const [data, setData] = useState([]);
+
+  // It state will contain the error when
+  // correct file extension is not used
+  const [error, setError] = useState("");
+
+  // It will store the file uploaded by the user
+  const [file, setFile] = useState("");
+  const [airports, setAirports] = useState();
+  const [countries, setCountries] = useState();
+  const loadAirports = function () {
+    fetch("../../data/airports.csv").then((airportData) => {
+      setAirports(airportData);
+      console.log(airportData);
+    });
+  };
+  let class_list = [
+    "Class",
+    "Economy",
+    "Premium Economy",
+    "Business",
+    "First Class",
+  ];
+  let IATACode = ["TPA", "ORL"];
+
+  let trip_type = ["One-Way", "Round-Trip"];
   return (
     <div className="flex flex-col">
       <div className="flex justify-around">

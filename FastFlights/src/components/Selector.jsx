@@ -1,8 +1,8 @@
 import { TicketBox } from "./ticket";
 import Dropdown from "./dropdown";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Papa from "papaparse";
-import "../data/airports.csv";
+import csv from "../data/airports.csv";
 import "../data/countries.csv";
 const tickets = [
   {
@@ -31,6 +31,23 @@ const allowedExtensions = ["csv"];
 function Selector() {
   const [data, setData] = useState([]);
 
+  useEffect(() => {
+    const loadAirportData = () => {
+      fetch("airports.csv")
+        .then((response) => response.text())
+        .then((csvData) => {
+          const lines = csvData.split("\n");
+          const data = [];
+          for (const line of lines) {
+            const values = line.split(",");
+            data.push(values);
+          }
+          console.log(data);
+        });
+    };
+    loadAirportData();
+  }, []);
+
   // It state will contain the error when
   // correct file extension is not used
   const [error, setError] = useState("");
@@ -40,11 +57,12 @@ function Selector() {
   const [airports, setAirports] = useState();
   const [countries, setCountries] = useState();
   const loadAirports = function () {
-    fetch("../../data/airports.csv").then((airportData) => {
+    fetch(csv).then((airportData) => {
       setAirports(airportData);
       console.log(airportData);
     });
   };
+
   let class_list = [
     "Class",
     "Economy",

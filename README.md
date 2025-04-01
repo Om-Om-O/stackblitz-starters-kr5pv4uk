@@ -1,3 +1,9 @@
-# stackblitz-starters-kr5pv4uk
+# React + Vite
 
-[Edit in StackBlitz next generation editor ⚡️](https://stackblitz.com/~/github.com/Om-Om-O/stackblitz-starters-kr5pv4uk)
+# https://developers.amadeus.com/my-apps/Fast%20Flights?userId=omdeshpande59@gmail.com
+
+# Api key
+
+# SXs9Almd8OQLSITRY1tRiE5GlvylYgNh
+
+# amadeus api
